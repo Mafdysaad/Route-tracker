@@ -10,6 +10,9 @@ class RouteTracker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Scaffold(body: Googlemapview()));
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(body: Googlemapview()),
+    );
   }
 }
