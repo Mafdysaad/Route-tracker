@@ -5,23 +5,20 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:route_tracker_pro/utils/map_services.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  test('calculate max and min latlong', () {
+    var mapServices = MapServices();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    final result = mapServices.getLatlngBounds([
+      [LatLng(12, 16), LatLng(3, 5), LatLng(5, 12)],
+    ]);
+    expect(result.southwest.latitude, 3);
+    expect(result.southwest.longitude, 5);
+    expect(result.northeast.latitude, 12);
+    expect(result.northeast.longitude, 16);
   });
 }

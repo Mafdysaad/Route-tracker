@@ -1,17 +1,23 @@
-import 'route.dart';
+import 'polyline.dart';
 
 class RoutesModle {
-	List<Route>? routes;
+	int? distanceMeters;
+	String? duration;
+	Polyline? polyline;
 
-	RoutesModle({this.routes});
+	RoutesModle({this.distanceMeters, this.duration, this.polyline});
 
 	factory RoutesModle.fromJson(Map<String, dynamic> json) => RoutesModle(
-				routes: (json['routes'] as List<dynamic>?)
-						?.map((e) => Route.fromJson(e as Map<String, dynamic>))
-						.toList(),
+				distanceMeters: json['distanceMeters'] as int?,
+				duration: json['duration'] as String?,
+				polyline: json['polyline'] == null
+						? null
+						: Polyline.fromJson(json['polyline'] as Map<String, dynamic>),
 			);
 
 	Map<String, dynamic> toJson() => {
-				'routes': routes?.map((e) => e.toJson()).toList(),
+				'distanceMeters': distanceMeters,
+				'duration': duration,
+				'polyline': polyline?.toJson(),
 			};
 }

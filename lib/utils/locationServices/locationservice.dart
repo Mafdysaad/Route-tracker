@@ -35,11 +35,12 @@ class Locationservice {
   void getRealTimeLocation(void Function(LocationData)? streamLocation) async {
     await checkAndRequestLocationService();
     await checkAndRequestLocationPermission();
+    //when user move send location in little dastanc
     location.changeSettings(distanceFilter: 2);
     location.onLocationChanged.listen(streamLocation);
   }
 
-  Future<LocationData> getLocation() async {
+  Future<LocationData> getlocation() async {
     await checkAndRequestLocationService();
     await checkAndRequestLocationPermission();
     return await location.getLocation();
